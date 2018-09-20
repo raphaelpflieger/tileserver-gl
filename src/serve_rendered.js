@@ -463,7 +463,8 @@ module.exports = function(options, repo, params, id, dataResolver) {
             var usePngQuant = (options.formatQuality || {}).pngQuantization === true; 
             if (usePngQuant) {  
               buffer = pngquant.compress(buffer, {  
-                quality: [0, formatQuality || 90] 
+                quality: [0, formatQuality || 90],
+                speed: 10
               }); 
             } 
           }
