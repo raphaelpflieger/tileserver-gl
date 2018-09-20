@@ -34,6 +34,7 @@
     "handlebars": "4.0.12",
     "http-shutdown": "^1.2.0",
     "morgan": "1.9.1",
+    "node-pngquant-native": "2.0.1",
     "pbf": "3.1.0",
     "proj4": "2.5.0",
     "request": "2.88.0",
