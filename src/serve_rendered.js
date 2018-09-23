@@ -457,6 +457,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
         }
         image.toBuffer(function(err, buffer, info) {
           if (!buffer) {
+            console.log('!!!! Not found in no buffer 404 !!!');
             return res.status(404).send('Not found');
           }
           if (format == 'png') {  
@@ -494,6 +495,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
         format = req.params.format;
     if (z < 0 || x < 0 || y < 0 ||
         z > 20 || x >= Math.pow(2, z) || y >= Math.pow(2, z)) {
+      console.log('!!!! Out of bounds 404 !!!');
       return res.status(404).send('Out of bounds');
     }
     var tileSize = 256;
@@ -625,6 +627,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
           format = req.params.format;
 
       if (z < 0) {
+        console.log('!!!! Invalid zoom 404 !!!');
         return res.status(404).send('Invalid zoom');
       }
 
