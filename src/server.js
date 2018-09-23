@@ -147,8 +147,7 @@ function start(opts) {
     }
     if (item.serve_rendered !== false) {
       if (serve_rendered) {
-        console.log(' --------- if serve_rendered -----------');
-        console.log(options);
+        //console.log(options);
         startupPromises.push(
           serve_rendered(options, serving.rendered, item, id,
             function(mbtiles) {
