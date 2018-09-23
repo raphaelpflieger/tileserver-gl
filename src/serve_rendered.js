@@ -206,6 +206,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
               callback(null, response);
             });
           } else if (protocol == 'http' || protocol == 'https') {
+            console.log(req);
             request({
                 url: req.url,
                 encoding: null,
@@ -215,7 +216,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
                 var extension = path.extname(parts.pathname).toLowerCase();
                 var format = extensionToFormat[extension] || '';
                 if (err || res.statusCode < 200 || res.statusCode >= 300) {
-                  // console.log('HTTP error', err || res.statusCode);
+                  console.log('HTTP error', err || res.statusCode);
                   createEmptyResponse(format, '', callback);
                   return;
                 }
