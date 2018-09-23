@@ -50,8 +50,9 @@ module.exports.getTileUrls = function(req, domains, path, format, aliases) {
 
   var uris = [];
   domains.forEach(function(domain) {
-    uris.push(req.protocol + '://' + domain + '/' + path +
-              '/{z}/{x}/{y}.' + format + query);
+    let uri = req.protocol + '://' + domain + '/' + path + '/{z}/{x}/{y}.' + format + query;
+    console.log(uri);
+    uris.push(uri);
   });
 
   return uris;

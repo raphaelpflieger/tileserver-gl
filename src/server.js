@@ -159,7 +159,6 @@ function start(opts) {
               return mbtilesFile;
             }
           ).then(function(sub) {
-            console.log(sub);
             app.use('/styles/', sub);
           })
         );
