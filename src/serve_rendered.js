@@ -479,6 +479,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
   };
 
   app.get(tilePattern, function(req, res, next) {
+    console.log(req);
     var modifiedSince = req.get('if-modified-since'), cc = req.get('cache-control');
     if (modifiedSince && (!cc || cc.indexOf('no-cache') == -1)) {
       if (new Date(lastModified) <= new Date(modifiedSince)) {
