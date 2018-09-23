@@ -168,8 +168,6 @@ module.exports = function(options, repo, params, id, dataResolver) {
               callback(err, {data: null});
             });
           } else if (protocol == 'mbtiles') {
-            console.log("!!! test mbtiles !!!")
-            console.log(req.url);
             var parts = req.url.split('/');
             var sourceId = parts[2];
             var source = map.sources[sourceId];

@@ -257,6 +257,7 @@ function start(opts) {
         var compiled = handlebars.compile(content.toString());
 
         app.use(urlPath, function(req, res, next) {
+          console.log(req);
           var data = {};
           if (dataGetter) {
             data = dataGetter(req);
