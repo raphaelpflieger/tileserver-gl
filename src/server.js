@@ -277,6 +277,8 @@ function start(opts) {
   };
 
   serveTemplate('/$', 'index', function(req) {
+    console.log('! Serving template !!!!!!');
+    console.log(req);
     var styles = clone(config.styles || {});
     Object.keys(styles).forEach(function(id) {
       var style = styles[id];
@@ -380,6 +382,7 @@ function start(opts) {
   });
 
   serveTemplate('/data/:id/$', 'data', function(req) {
+    console.log(req);
     var id = req.params.id;
     var data = clone(serving.data[id]);
     if (!data) {
