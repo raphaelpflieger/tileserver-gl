@@ -147,6 +147,8 @@ function start(opts) {
     }
     if (item.serve_rendered !== false) {
       if (serve_rendered) {
+        console.log(' --------- if serve_rendered -----------');
+        console.log(options);
         startupPromises.push(
           serve_rendered(options, serving.rendered, item, id,
             function(mbtiles) {
@@ -277,8 +279,7 @@ function start(opts) {
   };
 
   serveTemplate('/$', 'index', function(req) {
-    console.log('! Serving template !!!!!!');
-    console.log(req);
+    console.log('!!!!!!!!!! /$ "index" serve_template !!!!!!!!!')
     var styles = clone(config.styles || {});
     Object.keys(styles).forEach(function(id) {
       var style = styles[id];
@@ -349,6 +350,7 @@ function start(opts) {
   });
 
   serveTemplate('/styles/:id/$', 'viewer', function(req) {
+    console.log('!!!!!!!!!! /styles/:id/$ serve_template !!!!!!!!!')
     var id = req.params.id;
     var style = clone((config.styles || {})[id]);
     if (!style) {
@@ -367,6 +369,7 @@ function start(opts) {
   });
   */
   serveTemplate('/styles/:id/wmts.xml', 'wmts', function(req) {
+    console.log('!!!!!!!!!! /styles/:id/wmts.xml serve_template !!!!!!!!!')
     var id = req.params.id;
     var wmts = clone((config.styles || {})[id]);
     if (!wmts) {
@@ -382,6 +385,7 @@ function start(opts) {
   });
 
   serveTemplate('/data/:id/$', 'data', function(req) {
+    console.log('!!!!!!!!!! /data/:id/$ serve_template !!!!!!!!!')
     console.log(req);
     var id = req.params.id;
     var data = clone(serving.data[id]);
