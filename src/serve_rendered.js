@@ -472,11 +472,19 @@ module.exports = function(options, repo, params, id, dataResolver) {
             console.log(':::::::::::::: scale ::::::::::::::::');
             console.log(scale);
             console.log(':::::::::::::::::::::::::::::::::::::');
+
+            //:::::::::::::::::::::::::::::::::::::::::::
+            //:::::::::::::::: FORK EDIT ::::::::::::::::
+            //:::::::::::::::::::::::::::::::::::::::::::
+            if (scale > 1) { formatQuality = 40 }
+            //:::::::::::::::::::::::::::::::::::::::::::
+            console.log(formatQuality);
+
             var usePngQuant = (options.formatQuality || {}).pngQuantization === true; 
             if (usePngQuant) {  
               buffer = pngquant.compress(buffer, {  
                 quality: [0, formatQuality || 90],
-                speed: 7
+                speed: 10
               }); 
             } 
           }
