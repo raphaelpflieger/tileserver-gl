@@ -377,6 +377,8 @@ module.exports = function(options, repo, params, id, dataResolver) {
 
   repo[id] = tileJSON;
 
+  scalePattern = '__retina__';
+
   var tilePattern = '/' + id + '/:z(\\d+)/:x(\\d+)/:y(\\d+)' +
                     ':scale(' + scalePattern + ')?\.:format([\\w]+)';
 
