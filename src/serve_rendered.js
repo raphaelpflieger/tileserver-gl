@@ -100,12 +100,6 @@ function createEmptyResponse(format, color, callback) {
 
 module.exports = function(options, repo, params, id, dataResolver) {
 
-  console.log(module.exports);
-  console.log(params);
-  console.log(id);
-  console.log(repo);
-  console.log(options);
-
   var app = express().disable('x-powered-by');
 
   var maxScaleFactor = Math.min(Math.floor(options.maxScaleFactor || 3), 9);
@@ -502,9 +496,9 @@ module.exports = function(options, repo, params, id, dataResolver) {
     // so @2x requests are coming with '__retina__' as scale param instead
     // and 'undefined' scale param if @1x request
     if (req.params.scale == '__retina__') {
-      req.params.scale = 2;
+      req.params.scale = '@2x';
     } else { // if undefined
-      req.params.scale = 1;
+      req.params.scale = '@1x';
     }
     //::::::::::::::::::::::::::::::::::::::::::::::::::
 
