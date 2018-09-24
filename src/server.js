@@ -381,7 +381,6 @@ function start(opts) {
   });
 
   serveTemplate('/data/:id/$', 'data', function(req) {
-    console.log(req);
     var id = req.params.id;
     var data = clone(serving.data[id]);
     if (!data) {

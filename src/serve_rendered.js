@@ -487,8 +487,9 @@ module.exports = function(options, repo, params, id, dataResolver) {
   };
 
   app.get(tilePattern, function(req, res, next) {
-    console.log('!!!!!!!!!!!!! app.get(tilePattern !!!!!!!!!!!');
-    console.log(req.params);
+    
+    //console.log('!!!!!!!!!!!!! app.get(tilePattern !!!!!!!!!!!');
+    //console.log(req.params);
 
     //::::::::::::::::::::::::::::::::::::::::::::::::::
     //:::::::::::::::::: FORK EDIT :::::::::::::::::::::
