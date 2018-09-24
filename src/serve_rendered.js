@@ -99,6 +99,13 @@ function createEmptyResponse(format, color, callback) {
 }
 
 module.exports = function(options, repo, params, id, dataResolver) {
+
+  console.log(module.exports);
+  console.log(params);
+  console.log(id);
+  console.log(repo);
+  console.log(options);
+
   var app = express().disable('x-powered-by');
 
   var maxScaleFactor = Math.min(Math.floor(options.maxScaleFactor || 3), 9);
@@ -149,7 +156,6 @@ module.exports = function(options, repo, params, id, dataResolver) {
         ratio: ratio,
         request: function(req, callback) {
           var protocol = req.url.split(':')[0];
-          console.log('Handling request:', req);
           if (protocol == 'sprites') {
             var dir = options.paths[protocol];
             var file = unescape(req.url).substring(protocol.length + 3);
@@ -614,7 +620,6 @@ module.exports = function(options, repo, params, id, dataResolver) {
                     FLOAT_PATTERN, FLOAT_PATTERN);
 
     app.get(util.format(staticPattern, centerPattern), function(req, res, next) {
-      console.log('!!!! in serve static maps !!!!!!!!');
       var raw = req.params.raw;
       var z = +req.params.z,
           x = +req.params.x,
@@ -648,7 +653,6 @@ module.exports = function(options, repo, params, id, dataResolver) {
     });
 
     var serveBounds = function(req, res, next) {
-      console.log('!!! in serve_bounds !!!!!!');
       var raw = req.params.raw;
       var bbox = [+req.params.minx, +req.params.miny,
                   +req.params.maxx, +req.params.maxy];
@@ -716,7 +720,6 @@ module.exports = function(options, repo, params, id, dataResolver) {
     var autoPattern = 'auto';
 
     app.get(util.format(staticPattern, autoPattern), function(req, res, next) {
-      console.log('!!!!!!!!! app.get(util.format(staticPattern, autoPattern) !!!!!!!!!');
       var raw = req.params.raw;
       var w = req.params.width | 0,
           h = req.params.height | 0,
