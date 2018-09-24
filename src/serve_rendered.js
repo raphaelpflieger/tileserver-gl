@@ -371,12 +371,15 @@ module.exports = function(options, repo, params, id, dataResolver) {
 
   repo[id] = tileJSON;
 
-  //::::::::::::::::::::::::::::::::::::::::::::::::::
-  //:::::::::::::::::: FORK EDIT :::::::::::::::::::::
+  //:::::::::::::::::::::::::::::::::::::::::::::::
+  //::::::::::::::: START FORK EDIT :::::::::::::::
+  //:::::::::::::::::::::::::::::::::::::::::::::::
   // @2x is breaking MapProxy server routing
   // so @2x requests are coming with  '__retina__' instead
   scalePattern = '__retina__';
-  //::::::::::::::::::::::::::::::::::::::::::::::::::
+  //:::::::::::::::::::::::::::::::::::::::::::::::
+  //:::::::::::::::: END FORK EDIT ::::::::::::::::
+  //:::::::::::::::::::::::::::::::::::::::::::::::
 
   var tilePattern = '/' + id + '/:z(\\d+)/:x(\\d+)/:y(\\d+)' +
                     ':scale(' + scalePattern + ')?\.:format([\\w]+)';
@@ -469,19 +472,21 @@ module.exports = function(options, repo, params, id, dataResolver) {
           }
           if (format == 'png') {
 
-            //:::::::::::::::::::::::::::::::::::::::::::
-            //:::::::::::::::: FORK EDIT ::::::::::::::::
-            //:::::::::::::::::::::::::::::::::::::::::::
-            if (scale > 1) { formatQuality = 20 }
-            //:::::::::::::::::::::::::::::::::::::::::::
-
+            //:::::::::::::::::::::::::::::::::::::::::::::::
+            //::::::::::::::: START FORK EDIT :::::::::::::::
+            //:::::::::::::::::::::::::::::::::::::::::::::::
+            if (scale > 1) { formatQuality = 40 }
             var usePngQuant = (options.formatQuality || {}).pngQuantization === true; 
             if (usePngQuant) {  
               buffer = pngquant.compress(buffer, {  
                 quality: [0, formatQuality || 90],
-                speed: 7
+                speed: 9
               }); 
-            } 
+            }
+            //:::::::::::::::::::::::::::::::::::::::::::::::
+            //:::::::::::::::: END FORK EDIT ::::::::::::::::
+            //:::::::::::::::::::::::::::::::::::::::::::::::
+
           }
           res.set({
             'Last-Modified': lastModified,
@@ -495,11 +500,9 @@ module.exports = function(options, repo, params, id, dataResolver) {
 
   app.get(tilePattern, function(req, res, next) {
 
-    //console.log('!!!!!!!!!!!!! app.get(tilePattern !!!!!!!!!!!');
-    //console.log(req.params);
-
-    //::::::::::::::::::::::::::::::::::::::::::::::::::
-    //:::::::::::::::::: FORK EDIT :::::::::::::::::::::
+    //:::::::::::::::::::::::::::::::::::::::::::::::
+    //::::::::::::::: START FORK EDIT :::::::::::::::
+    //:::::::::::::::::::::::::::::::::::::::::::::::
     // @2x is breaking MapProxy server routing
     // so @2x requests are coming with '__retina__' as scale param instead
     // and 'undefined' scale param if @1x request
@@ -508,7 +511,9 @@ module.exports = function(options, repo, params, id, dataResolver) {
     } else { // if undefined
       req.params.scale = '@1x';
     }
-    //::::::::::::::::::::::::::::::::::::::::::::::::::
+    //:::::::::::::::::::::::::::::::::::::::::::::::
+    //:::::::::::::::: END FORK EDIT ::::::::::::::::
+    //:::::::::::::::::::::::::::::::::::::::::::::::
 
     var modifiedSince = req.get('if-modified-since'), cc = req.get('cache-control');
     if (modifiedSince && (!cc || cc.indexOf('no-cache') == -1)) {
