@@ -472,7 +472,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
             //:::::::::::::::::::::::::::::::::::::::::::
             //:::::::::::::::: FORK EDIT ::::::::::::::::
             //:::::::::::::::::::::::::::::::::::::::::::
-            if (scale > 1) { formatQuality = 40 }
+            if (scale > 1) { formatQuality = 20 }
             //:::::::::::::::::::::::::::::::::::::::::::
 
             var usePngQuant = (options.formatQuality || {}).pngQuantization === true; 
