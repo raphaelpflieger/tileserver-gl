@@ -377,6 +377,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
   var respondImage = function(z, lon, lat, bearing, pitch,
                               width, height, scale, format, res, next,
                               opt_overlay) {
+    console.log('In respondImage !!!!!!!!!!!!!!!!!!!!!!!!');
     if (Math.abs(lon) > 180 || Math.abs(lat) > 85.06 ||
         lon != lon || lat != lat) {
       return res.status(400).send('Invalid center');
