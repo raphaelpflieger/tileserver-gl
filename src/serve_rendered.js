@@ -382,6 +382,10 @@ module.exports = function(options, repo, params, id, dataResolver) {
   var tilePattern = '/' + id + '/:z(\\d+)/:x(\\d+)/:y(\\d+)' +
                     ':scale(' + scalePattern + ')?\.:format([\\w]+)';
 
+  var respondImage = function(z, lon, lat, bearing, pitch,
+                              width, height, scale, format, res, next,
+                              opt_overlay) {
+
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
@@ -391,7 +395,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(tilePattern);
+  console.log(scale);
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
@@ -401,9 +405,6 @@ module.exports = function(options, repo, params, id, dataResolver) {
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
 
-  var respondImage = function(z, lon, lat, bearing, pitch,
-                              width, height, scale, format, res, next,
-                              opt_overlay) {
     if (Math.abs(lon) > 180 || Math.abs(lat) > 85.06 ||
         lon != lon || lat != lat) {
       return res.status(400).send('Invalid center');
