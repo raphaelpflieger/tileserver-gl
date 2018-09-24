@@ -377,7 +377,6 @@ module.exports = function(options, repo, params, id, dataResolver) {
   var respondImage = function(z, lon, lat, bearing, pitch,
                               width, height, scale, format, res, next,
                               opt_overlay) {
-    console.log('In respondImage !!!!!!!!!!!!!!!!!!!!!!!!');
     if (Math.abs(lon) > 180 || Math.abs(lat) > 85.06 ||
         lon != lon || lat != lat) {
       return res.status(400).send('Invalid center');
@@ -480,7 +479,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
   };
 
   app.get(tilePattern, function(req, res, next) {
-    //console.log(req);
+    console.log('!!!!!!!!!!!!! app.get(tilePattern !!!!!!!!!!!');
     var modifiedSince = req.get('if-modified-since'), cc = req.get('cache-control');
     if (modifiedSince && (!cc || cc.indexOf('no-cache') == -1)) {
       if (new Date(lastModified) <= new Date(modifiedSince)) {
@@ -614,6 +613,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
                     FLOAT_PATTERN, FLOAT_PATTERN);
 
     app.get(util.format(staticPattern, centerPattern), function(req, res, next) {
+      console.log('!!!! in serve static maps !!!!!!!!');
       var raw = req.params.raw;
       var z = +req.params.z,
           x = +req.params.x,
@@ -647,6 +647,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
     });
 
     var serveBounds = function(req, res, next) {
+      console.log('!!! in serve_bounds !!!!!!');
       var raw = req.params.raw;
       var bbox = [+req.params.minx, +req.params.miny,
                   +req.params.maxx, +req.params.maxy];
@@ -714,6 +715,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
     var autoPattern = 'auto';
 
     app.get(util.format(staticPattern, autoPattern), function(req, res, next) {
+      console.log('!!!!!!!!! app.get(util.format(staticPattern, autoPattern) !!!!!!!!!');
       var raw = req.params.raw;
       var w = req.params.width | 0,
           h = req.params.height | 0,
