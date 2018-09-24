@@ -391,13 +391,6 @@ module.exports = function(options, repo, params, id, dataResolver) {
                               width, height, scale, format, res, next,
                               opt_overlay) {
 
-    //::::::::::::::::::::::::::::::::::::::::::::::::::
-    //:::::::::::::::::: FORK EDIT :::::::::::::::::::::
-    // scale param is 0 when scalePattern == '__retina__'
-    // replace 0 with 2 to have proper @2x tiles :)
-    if (scale == 0) { scale = 2 };
-    //::::::::::::::::::::::::::::::::::::::::::::::::::
-
     if (Math.abs(lon) > 180 || Math.abs(lat) > 85.06 ||
         lon != lon || lat != lat) {
       return res.status(400).send('Invalid center');
@@ -502,7 +495,19 @@ module.exports = function(options, repo, params, id, dataResolver) {
   app.get(tilePattern, function(req, res, next) {
     console.log('!!!!!!!!!!!!! app.get(tilePattern !!!!!!!!!!!');
     console.log(req.params);
-    //console.log(req);
+
+    //::::::::::::::::::::::::::::::::::::::::::::::::::
+    //:::::::::::::::::: FORK EDIT :::::::::::::::::::::
+    // @2x is breaking MapProxy server routing
+    // so @2x requests are coming with '__retina__' as scale param instead
+    // and 'undefined' scale param if @1x request
+    if (req.params.scale == '__retina__') {
+      req.params.scale = 2;
+    } else { // if undefined
+      req.params.scale = 1;
+    }
+    //::::::::::::::::::::::::::::::::::::::::::::::::::
+
     var modifiedSince = req.get('if-modified-since'), cc = req.get('cache-control');
     if (modifiedSince && (!cc || cc.indexOf('no-cache') == -1)) {
       if (new Date(lastModified) <= new Date(modifiedSince)) {
