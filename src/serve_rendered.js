@@ -467,7 +467,11 @@ module.exports = function(options, repo, params, id, dataResolver) {
           if (!buffer) {
             return res.status(404).send('Not found');
           }
-          if (format == 'png') {  
+          if (format == 'png') {
+            console.log(':::::::::::::::::::::::::::::::::::::');
+            console.log(':::::::::::::: scale ::::::::::::::::');
+            console.log(scale);
+            console.log(':::::::::::::::::::::::::::::::::::::');
             var usePngQuant = (options.formatQuality || {}).pngQuantization === true; 
             if (usePngQuant) {  
               buffer = pngquant.compress(buffer, {  
@@ -487,7 +491,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
   };
 
   app.get(tilePattern, function(req, res, next) {
-    
+
     //console.log('!!!!!!!!!!!!! app.get(tilePattern !!!!!!!!!!!');
     //console.log(req.params);
 
