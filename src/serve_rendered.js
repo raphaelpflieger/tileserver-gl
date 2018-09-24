@@ -405,6 +405,8 @@ module.exports = function(options, repo, params, id, dataResolver) {
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
   console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
 
+    if (scale == 0) { scale = 2 };
+
     if (Math.abs(lon) > 180 || Math.abs(lat) > 85.06 ||
         lon != lon || lat != lat) {
       return res.status(400).send('Invalid center');
