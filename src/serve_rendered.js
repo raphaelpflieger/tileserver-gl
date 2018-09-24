@@ -377,7 +377,12 @@ module.exports = function(options, repo, params, id, dataResolver) {
 
   repo[id] = tileJSON;
 
+  //::::::::::::::::::::::::::::::::::::::::::::::::::
+  //:::::::::::::::::: FORK EDIT :::::::::::::::::::::
+  // @2x is breaking MapProxy server routing
+  // so @2x requests are coming with  '__retina__' instead
   scalePattern = '__retina__';
+  //::::::::::::::::::::::::::::::::::::::::::::::::::
 
   var tilePattern = '/' + id + '/:z(\\d+)/:x(\\d+)/:y(\\d+)' +
                     ':scale(' + scalePattern + ')?\.:format([\\w]+)';
@@ -386,26 +391,12 @@ module.exports = function(options, repo, params, id, dataResolver) {
                               width, height, scale, format, res, next,
                               opt_overlay) {
 
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(scale);
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-  console.log(':::::::::::::::::::::::::::::::::::::::::::::::');
-
+    //::::::::::::::::::::::::::::::::::::::::::::::::::
+    //:::::::::::::::::: FORK EDIT :::::::::::::::::::::
+    // scale param is 0 when scalePattern == '__retina__'
+    // replace 0 with 2 to have proper @2x tiles :)
     if (scale == 0) { scale = 2 };
+    //::::::::::::::::::::::::::::::::::::::::::::::::::
 
     if (Math.abs(lon) > 180 || Math.abs(lat) > 85.06 ||
         lon != lon || lat != lat) {
@@ -510,6 +501,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
 
   app.get(tilePattern, function(req, res, next) {
     console.log('!!!!!!!!!!!!! app.get(tilePattern !!!!!!!!!!!');
+    console.log(req.params);
     //console.log(req);
     var modifiedSince = req.get('if-modified-since'), cc = req.get('cache-control');
     if (modifiedSince && (!cc || cc.indexOf('no-cache') == -1)) {
