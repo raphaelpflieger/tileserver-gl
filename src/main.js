@@ -174,6 +174,7 @@ var startWithMBTiles = function(mbtilesFile) {
 };
 
 fs.stat(path.resolve(opts.config), function(err, stats) {
+  console.log(opts);
   if (err || !stats.isFile() || stats.size === 0) {
     var mbtiles = opts.mbtiles;
     if (!mbtiles) {
