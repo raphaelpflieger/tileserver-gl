@@ -475,12 +475,12 @@ module.exports = function(options, repo, params, id, dataResolver) {
             //:::::::::::::::::::::::::::::::::::::::::::::::
             //::::::::::::::: START FORK EDIT :::::::::::::::
             //:::::::::::::::::::::::::::::::::::::::::::::::
-            if (scale > 1) { formatQuality = 40 }
+            if (scale > 1) { formatQuality = 60 }
             var usePngQuant = (options.formatQuality || {}).pngQuantization === true; 
             if (usePngQuant) {  
               buffer = pngquant.compress(buffer, {  
                 quality: [0, formatQuality || 90],
-                speed: 9
+                speed: 5
               }); 
             }
             //:::::::::::::::::::::::::::::::::::::::::::::::
