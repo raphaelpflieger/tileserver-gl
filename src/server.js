@@ -5,8 +5,7 @@
 //:::::::::::::::::: FORK EDIT :::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // We need to have some cpu available for MapProxy gunicorn as well !
-process.env.UV_THREADPOOL_SIZE =
-    Math.ceil(Math.max(4, ((require('os').cpus().length) / 4) * 1.5));
+process.env.UV_THREADPOOL_SIZE = 4
 //process.env.UV_THREADPOOL_SIZE =
 //    Math.ceil(Math.max(4, require('os').cpus().length * 1.5));
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::
