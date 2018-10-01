@@ -16,10 +16,18 @@ sleep 3
 
 export DISPLAY=:99.0
 
-cd /data
-node /usr/src/app/ -p 80 "$@" &
-child=$!
-wait "$child"
+if [ ! -d /vagrant ]; then
+	/usr/local/src/mbtiles
+	node /usr/local/src/tileserver-gl -c /usr/local/src/config/tsgl_prod.json -p 8080 "$@" &
+	child=$!
+	wait "$child"
+else
+	cd /vagrant/mbtiles
+	node /usr/local/src/tileserver-gl -c /usr/local/src/config/tsgl_dev.json -p 8080 "$@" &
+	child=$!
+	wait "$child"	
+fi
+
 
 start-stop-daemon --stop --retry 5 --pidfile ~/xvfb.pid # stop xvfb when exiting
 rm ~/xvfb.pid
