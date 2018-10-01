@@ -61,7 +61,9 @@ function start(opts) {
   var configPath = null;
   if (opts.configPath) {
     configPath = path.resolve(opts.configPath);
+    console.log('Will try to open config file at ' + configPath);
     try {
+      console.log(require(configPath));
       config = clone(require(configPath));
     } catch (e) {
       console.log('ERROR: Config file not found or invalid!');
