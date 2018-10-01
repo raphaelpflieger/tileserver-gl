@@ -23,7 +23,7 @@ if [ ! -d /vagrant ]; then
 	wait "$child"
 else
 	cd /vagrant/mbtiles
-	node /usr/local/src/tileserver-gl --verbose -c /usr/local/src/config/tsgl_dev.json -p 8080 "$@" &
+	node /usr/local/src/tileserver-gl --verbose -c /vagrant/config/tsgl_dev.json -p 8080 "$@" &
 	child=$!
 	wait "$child"	
 fi
