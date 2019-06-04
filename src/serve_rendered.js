@@ -98,7 +98,7 @@ function createEmptyResponse(format, color, callback) {
   });
 }
 
-module.exports = function(options, repo, params, id, dataResolver) {
+module.exports = function(options, repo, params, id, publicUrl, dataResolver) {
 
   var app = express().disable('x-powered-by');
 
@@ -178,7 +178,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
                 format = parts[5].split('.')[1];
             source.getTile(z, x, y, function(err, data, headers) {
               if (err) {
-                //console.log('MBTiles error, serving empty', err);
+                if (options.verbose) console.log('MBTiles error, serving empty', err);
                 createEmptyResponse(sourceInfo.format, sourceInfo.color, callback);
                 return;
               }
@@ -792,7 +792,7 @@ module.exports = function(options, repo, params, id, dataResolver) {
   app.get('/' + id + '.json', function(req, res, next) {
     var info = clone(tileJSON);
     info.tiles = utils.getTileUrls(req, info.tiles,
-                                   'styles/' + id, info.format);
+                                   'styles/' + id, info.format, publicUrl);
     return res.send(info);
   });
 
