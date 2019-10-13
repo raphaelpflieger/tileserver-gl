@@ -27,17 +27,11 @@ fi
 
 export DISPLAY=:${displayNumber}.${screenNumber}
 
-if [ ! -d /vagrant ]; then
-	/usr/local/src/mbtiles
-	node /usr/local/src/tileserver-gl -c /usr/local/src/config/tsgl_prod.json -p 8080 "$@" &
-	child=$!
-	wait "$child"
-else
-	cd /vagrant/mbtiles
-	node /usr/local/src/tileserver-gl --verbose -c /vagrant/config/tsgl_dev.json -p 8080 "$@" &
-	child=$!
-	wait "$child"	
-fi
+echo
+cd /data
+node /usr/src/app/ --verbose -c /data/config.json -p 80 "$@" &
+child=$!
+wait "$child"
 
 start-stop-daemon --stop --retry 5 --pidfile ~/xvfb.pid # stop xvfb when exiting
 rm ~/xvfb.pid
