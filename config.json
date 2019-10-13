@@ -1,0 +1,39 @@
+{
+  "options": {
+    "paths": {
+      "root": "/usr/src/app/node_modules/tileserver-gl-styles",
+      "fonts": "/data/assets/fonts",
+      "styles": "/data/assets/styles",
+      "mbtiles": "/data"
+    }
+  },
+  "styles": {
+    "klokantech-basic": {
+      "style": "klokantech-basic/style.json",
+      "tilejson": {
+        "bounds": [
+          -180,
+          -85.0511,
+          180,
+          85.0511
+        ]
+      }
+    },
+    "osm-bright": {
+      "style": "osm-bright/style.json",
+      "tilejson": {
+        "bounds": [
+          -180,
+          -85.0511,
+          180,
+          85.0511
+        ]
+      }
+    }
+  },
+  "data": {
+    "v3": {
+      "mbtiles": "osm-2019-10-07-v3.10-planet.mbtiles"
+    }
+  }
+}

@@ -22,6 +22,7 @@ RUN apt-get -qq update \
     libxxf86vm-dev \
     xvfb \
     x11-utils \
+    bsdtar \
 && apt-get clean
 
 RUN mkdir -p /usr/src/app
